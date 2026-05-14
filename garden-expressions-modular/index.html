@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta -->
+  <title>Garden Expressions | Premium Plants &amp; Landscape Design</title>
+  <meta name="description" content="Curated premium plants, bespoke pots, and luxury landscape design in Kampala &amp; Nairobi. Transform your space with Garden Expressions." />
+  <meta name="keywords" content="landscape design Nairobi, landscape design Kampala, luxury plants Uganda, plant delivery Nairobi, garden design East Africa, premium nursery Kampala, outdoor living Uganda, bespoke garden design" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Garden Expressions — Premium Botanical Studio" />
+  <meta property="og:description" content="Where nature is curated. Premium plants, bespoke pots &amp; luxury landscape design across East Africa." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Tenor+Sans&amp;display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav id="nav" class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav__logo" href="#">
+  <img src="assets/logol.png" alt="Garden Expressions" />
+</a>
+
+
+    <ul class="nav__links">
+      <li><a href="#products">Plants</a></li>
+      <li><a href="#pots">Pots</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#quote">Contact</a></li>
+    </ul>
+
+    <button class="nav__cta" id="navCta">Get a Quote</button>
+
+    <button class="nav__hamburger" id="navHamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div class="nav__mobile" id="navMobile" aria-hidden="true">
+    <ul class="nav__mobile-links">
+      <li><a href="#products">Plants</a></li>
+      <li><a href="#pots">Pots</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#quote">Contact</a></li>
+    </ul>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <main>
+
+    <!-- HERO ───────────────────────────── -->
+    <section id="hero" class="hero" aria-label="Hero">
+
+      <!-- Parallax background (src set via CSS) -->
+      <div class="hero__bg" id="heroBg">
+  <video class="hero__video" autoplay muted loop playsinline poster="assets/Bird of Paradise.png">
+    <source src="assets/hero-video.mp4" type="video/mp4" />
+  </video>
+</div>
+
+
+      <!-- Botanical SVG decoration — right side -->
+      <svg class="hero__deco hero__deco--right" viewBox="0 0 200 300" fill="none" aria-hidden="true">
+        <path d="M100 280 C100 280 100 100 100 20" stroke="#c8a96e" stroke-width="1" stroke-linecap="round"/>
+        <path d="M100 140 C60 110 20 120 10 90"    stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M100 140 C140 110 180 120 190 90"  stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M100 190 C65 165 35 175 22 150"    stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M100 190 C135 165 165 175 178 150" stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M100 230 C75 215 55 220 45 205"    stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M100 230 C125 215 145 220 155 205" stroke="#c8a96e" stroke-width="0.8" stroke-linecap="round"/>
+        <ellipse cx="100" cy="20"  rx="22" ry="32" stroke="#c8a96e" stroke-width="0.8" transform="rotate(-15,100,20)"/>
+        <ellipse cx="10"  cy="88"  rx="18" ry="28" stroke="#c8a96e" stroke-width="0.6" transform="rotate(-40,10,88)"/>
+        <ellipse cx="190" cy="88"  rx="18" ry="28" stroke="#c8a96e" stroke-width="0.6" transform="rotate(40,190,88)"/>
+      </svg>
+
+      <!-- Botanical SVG decoration — left side -->
+      <svg class="hero__deco hero__deco--left" viewBox="0 0 140 200" fill="none" aria-hidden="true">
+        <circle cx="70" cy="40" r="35" stroke="#8aab8f" stroke-width="0.8"/>
+        <circle cx="70" cy="40" r="20" stroke="#8aab8f" stroke-width="0.5"/>
+        <path d="M70 75 L70 190"                 stroke="#8aab8f" stroke-width="0.8"/>
+        <path d="M70 120 C50 105 30 110 20 98"   stroke="#8aab8f" stroke-width="0.6"/>
+        <path d="M70 120 C90 105 110 110 120 98"  stroke="#8aab8f" stroke-width="0.6"/>
+      </svg>
+
+      <!-- Hero text content -->
+      <div class="hero__content">
+        <div class="hero__tag label">Premium Botanical Studio &middot; Kampala &amp; Nairobi</div>
+        <h1 class="hero__title display">
+          Where Nature<br />is <em>Curated.</em>
+        </h1>
+        <p class="hero__sub">
+          Premium plants, bespoke ceramic pots &amp; luxury landscape design crafted for exceptional spaces across East Africa.
+        </p>
+        <div class="hero__ctas">
+          <a href="#products" class="btn btn--primary">View Our Collection</a>
+          <a href="#services" class="hero__cta-secondary">Our Services</a>
+        </div>
+      </div>
+
+      <!-- Animated scroll indicator -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="label">Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+
+    </section>
+
+
+    <!-- STATS BAR ───────────────────────── -->
+    <div class="stats-bar" aria-label="Key statistics">
+      <div class="stats-bar__item reveal" data-delay="1">
+        <div class="stats-bar__num">200<span>+</span></div>
+        <div class="stats-bar__desc">Plant Species</div>
+      </div>
+      <div class="stats-bar__item reveal" data-delay="2">
+        <div class="stats-bar__num">150<span>+</span></div>
+        <div class="stats-bar__desc">Projects Completed</div>
+      </div>
+      <div class="stats-bar__item reveal" data-delay="3">
+        <div class="stats-bar__num">8<span> yr</span></div>
+        <div class="stats-bar__desc">Of Excellence</div>
+      </div>
+      <div class="stats-bar__item reveal" data-delay="4">
+        <div class="stats-bar__num">2</div>
+        <div class="stats-bar__desc">Cities &middot; KLA &amp; NBI</div>
+      </div>
+    </div>
+
+
+    <!-- MARQUEE ─────────────────────────── -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <!-- Two identical rows create a seamless infinite loop -->
+        <div class="marquee__item">
+          Monstera Deliciosa <span class="marquee__dot"></span>
+          Fiddle Leaf Fig <span class="marquee__dot"></span>
+          Snake Plant <span class="marquee__dot"></span>
+          Bird of Paradise <span class="marquee__dot"></span>
+          Olive Tree <span class="marquee__dot"></span>
+          Pothos <span class="marquee__dot"></span>
+          Philodendron <span class="marquee__dot"></span>
+        </div>
+        <div class="marquee__item" aria-hidden="true">
+          Monstera Deliciosa <span class="marquee__dot"></span>
+          Fiddle Leaf Fig <span class="marquee__dot"></span>
+          Snake Plant <span class="marquee__dot"></span>
+          Bird of Paradise <span class="marquee__dot"></span>
+          Olive Tree <span class="marquee__dot"></span>
+          Pothos <span class="marquee__dot"></span>
+          Philodendron <span class="marquee__dot"></span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PLANTS COLLECTION ───────────────── -->
+    <section id="products" class="section section--mid" aria-labelledby="products-heading">
+      <div class="section__inner">
+
+        <div class="section__header reveal">
+          <span class="section__label label">Curated Plants</span>
+          <!-- Botanical leaf divider -->
+          <div class="leaf-divider">
+            <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 26 C14 26 4 18 4 10 C4 5.6 8.5 2 14 2 C19.5 2 24 5.6 24 10 C24 18 14 26 14 26Z" stroke="#c8a96e" stroke-width="0.8"/>
+              <path d="M14 26 L14 12" stroke="#c8a96e" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <h2 class="headline" id="products-heading">The Living Collection</h2>
+        </div>
+
+        <!-- Product cards injected by script.js -->
+        <div class="products-grid" id="plantGrid"></div>
+
+      </div>
+    </section>
+
+
+    <!-- POTS SHOWCASE ───────────────────── -->
+    <section id="pots" class="section section--deep" aria-labelledby="pots-heading">
+      <div class="section__inner">
+
+        <div class="section__header reveal">
+          <span class="section__label label">Curated Pots &amp; Vessels</span>
+          <h2 class="headline" id="pots-heading">Artisan Vessels</h2>
+          <p class="section__sub body-text">
+            Each pot is selected for form, material and soul — terracotta from Mbale,
+            glazed stoneware from Nairobi, and handwoven rattan from Jinja.
+          </p>
+        </div>
+
+        <!-- Pot cards injected by script.js -->
+        <div class="pots-strip" id="potsGrid"></div>
+
+      </div>
+    </section>
+
+
+    <!-- SERVICES ────────────────────────── -->
+    <section id="services" class="section section--deep" aria-labelledby="services-heading">
+      <div class="section__inner">
+        <div class="services__layout">
+
+          <!-- Left: portrait image with badge -->
+          <div class="services__visual reveal-left">
+            <img
+              src="https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=900&q=80"
+              alt="Luxury landscape design by Garden Expressions"
+              loading="lazy"
+            />
+            <div class="services__badge">
+              <span class="services__badge-num">8</span>
+              <span class="services__badge-label">Years of Craft</span>
+            </div>
+          </div>
+
+          <!-- Right: text + accordion -->
+          <div class="services__content reveal-right">
+            <span class="section__label label">Bespoke Design Services</span>
+            <h2 class="headline services__heading" id="services-heading">Landscape Artistry</h2>
+            <p class="body-text services__intro">
+              From rooftop gardens in Kololo to corporate atriums in Westlands — we design,
+              source, and install living spaces that breathe.
+            </p>
+
+            <!-- Service accordion items injected by script.js -->
+            <div class="services__list" id="servicesList"></div>
+
+            <a href="#quote" class="btn btn--primary services__cta">Request a Quote</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PROCESS ─────────────────────────── -->
+    <section id="process" class="section section--mid" aria-labelledby="process-heading">
+      <div class="section__inner">
+
+        <div class="section__header section__header--centered reveal">
+          <span class="section__label label">How It Works</span>
+          <h2 class="headline" id="process-heading">Our Design Process</h2>
+        </div>
+
+        <!-- Process step cards injected by script.js -->
+        <div class="process__steps" id="processSteps"></div>
+
+      </div>
+    </section>
+
+
+    <!-- QUOTE / CONTACT FORM ────────────── -->
+    <section id="quote" class="quote" aria-labelledby="quote-heading">
+      <div class="quote__inner">
+
+        <span class="section__label label">Start Your Project</span>
+        <h2 class="headline quote__heading" id="quote-heading">Request a Consultation</h2>
+        <p class="body-text quote__sub">
+          Whether you have a balcony or a compound, tell us about your space
+          and we will craft something extraordinary.
+        </p>
+
+        <form class="quote__form" id="quoteForm" novalidate>
+          <div class="form__field">
+            <input type="text"  name="name"  placeholder="Full Name"       required autocomplete="name" />
+          </div>
+          <div class="form__field">
+            <input type="tel"   name="phone" placeholder="WhatsApp Number" required autocomplete="tel" />
+          </div>
+          <div class="form__field">
+            <input type="email" name="email" placeholder="Email Address"          autocomplete="email" />
+          </div>
+          <div class="form__field">
+            <select name="service" required>
+              <option value="" disabled selected>Type of Service</option>
+              <option>Full Landscape Design &amp; Installation</option>
+              <option>Plant Sourcing &amp; Delivery</option>
+              <option>Pot &amp; Vessel Selection</option>
+              <option>Plant Care &amp; Maintenance</option>
+              <option>Interior Planting</option>
+            </select>
+          </div>
+          <div class="form__field form__field--full">
+            <textarea name="message" placeholder="Tell us about your space — size, location, and the feeling you want to create."></textarea>
+          </div>
+          <button type="submit" class="form__submit">
+            <span>Send Enquiry via WhatsApp</span>
+            <span>&rarr;</span>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+
+      <div class="footer__brand">
+        <div class="footer__brand-name">Garden <span>Expressions</span></div>
+        <p>Crafting botanical narratives and sustainable sanctuaries for discerning spaces across East Africa since 2017.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link">Instagram</a>
+          <a href="#" class="footer__social-link">Pinterest</a>
+          <a href="#" class="footer__social-link">TikTok</a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__col-title">Shop</span>
+        <ul>
+          <li><a href="#products">Indoor Plants</a></li>
+          <li><a href="#products">Outdoor Plants</a></li>
+          <li><a href="#pots">Pots &amp; Vessels</a></li>
+          <li><a href="#products">Plant Bundles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__col-title">Services</span>
+        <ul>
+          <li><a href="#services">Landscape Design</a></li>
+          <li><a href="#services">Installation</a></li>
+          <li><a href="#services">Maintenance</a></li>
+          <li><a href="#services">Interior Planting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__col-title">Connect</span>
+        <ul>
+          <li><a href="https://wa.me/256700000000">WhatsApp (UG)</a></li>
+          <li><a href="https://wa.me/254700000000">WhatsApp (KE)</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2025 Garden Expressions. All rights reserved. Serving Kampala &amp; Nairobi.</p>
+      <p><a href="#">Privacy Policy</a> &middot; <a href="#">Terms</a></p>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════
+       FLOATING WHATSAPP BUTTON
+  ═══════════════════════════════════════ -->
+  <a
+    class="whatsapp-fab"
+    href="https://wa.me/256700000000?text=Hi%20Garden%20Expressions!%20I'd%20like%20to%20enquire%20about%20your%20plants%20and%20services."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with us on WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.552 4.09 1.518 5.812L.057 23.054a.75.75 0 00.915.978l5.379-1.439A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.06-1.377.75.75 0 00-.573-.077l-3.762 1.007 1.02-3.7a.75.75 0 00-.08-.587A9.95 9.95 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+    <span class="whatsapp-fab__text">Chat with Us</span>
+  </a>
+
+
+  <!-- ═══════════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════════ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- JavaScript — deferred so DOM is ready before execution -->
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>

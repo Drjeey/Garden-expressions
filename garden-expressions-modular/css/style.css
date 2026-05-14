@@ -1,0 +1,1513 @@
+/* ============================================================
+   GARDEN EXPRESSIONS — STYLESHEET
+   Organised sections:
+     1. CSS Reset
+     2. Design Tokens (Custom Properties)
+     3. Base / Typography
+     4. Utilities
+     5. Layout Helpers
+     6. Components
+        ├── Navigation
+        ├── Hero
+        ├── Stats Bar
+        ├── Marquee Ticker
+        ├── Products Grid
+        ├── Pots Showcase
+        ├── Services Accordion
+        ├── Quote / Contact Form
+        ├── Process Steps
+        ├── Footer
+        ├── WhatsApp FAB
+        └── Toast Notification
+     7. Scroll Reveal Animations
+     8. Media Queries
+   ============================================================ */
+
+
+/* ============================================================
+   1. CSS RESET
+   Normalise browser defaults for a consistent baseline
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+textarea {
+  resize: none;
+}
+
+
+/* ============================================================
+   2. DESIGN TOKENS
+   All colours and typography as CSS custom properties.
+   Change once, updates everywhere.
+   ============================================================ */
+
+:root {
+  /* -- Colour Palette -- */
+  --color-forest-deep:   oklch(24% 0.078 148);         /* Darkest bg — deep forest, green now legible */
+  --color-forest-mid:    oklch(29% 0.082 148);         /* Section bg */
+  --color-forest-card:   oklch(26% 0.080 148);         /* Card bg */
+  --color-forest-hover:  oklch(33% 0.088 148);         /* Card hover bg */
+  --color-forest-footer: oklch(19% 0.065 148);         /* Footer bg — still the darkest */
+
+  --color-sage:          oklch(58% 0.100 148);         /* Accent green — slightly brighter on lifted bg */
+  --color-sage-light:    oklch(74% 0.082 148);         /* Muted green text */
+
+  --color-cream:         oklch(96% 0.016 86);          /* Primary text */
+  --color-cream-dim:     oklch(80% 0.015 86);          /* Secondary text */
+
+  --color-gold:          oklch(76% 0.12  80);          /* Primary accent */
+  --color-gold-dim:      oklch(62% 0.10  80);          /* Hover gold */
+
+  --color-text-muted:    oklch(70% 0.042 148);         /* Body / caption text — lifted to match new bg */
+  --color-border:        oklch(36% 0.082 148);         /* Subtle divider */
+  --color-border-bright: oklch(46% 0.095 148);         /* Highlighted border */
+
+  --color-whatsapp:      #25D366;
+
+  /* -- Typography -- */
+  --ff-display: 'Italiana', serif;
+  --ff-body:    'Tenor Sans', sans-serif;
+
+  /* -- Motion -- */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast:   0.25s var(--ease-out);
+  --transition-base:   0.35s var(--ease-out);
+  --transition-slow:   0.6s  var(--ease-out);
+
+  /* -- Spacing -- */
+  --space-section: clamp(5rem, 10vh, 9rem);
+  --space-gutter:  5vw;
+  --max-width:     1280px;
+}
+
+
+/* ============================================================
+   3. BASE / TYPOGRAPHY
+   ============================================================ */
+
+body {
+  background-color: var(--color-forest-deep);
+  color: var(--color-cream);
+  font-family: var(--ff-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle noise texture overlaid on the entire page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.75;
+}
+
+/* -- Type Scale -- */
+.display {
+  font-family: var(--ff-display);
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.headline {
+  font-family: var(--ff-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.1;
+}
+
+.label {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.body-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   4. UTILITIES
+   ============================================================ */
+
+/* Shared button styles */
+.btn {
+  display: inline-block;
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1.1rem 2.6rem;
+  transition: background var(--transition-base), border-color var(--transition-base), transform 0.2s;
+}
+
+.btn--primary {
+  color: var(--color-forest-deep);
+  background: var(--color-gold);
+}
+.btn--primary:hover {
+  background: var(--color-gold-dim);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  color: var(--color-cream);
+  border: 1px solid oklch(80% 0.015 86 / 0.5);
+}
+.btn--outline:hover {
+  border-color: var(--color-cream);
+  background: oklch(96% 0.016 86 / 0.08);
+  transform: translateY(-2px);
+}
+
+/* Leaf botanical divider */
+.leaf-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.leaf-divider::before,
+.leaf-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+.leaf-divider svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   5. LAYOUT HELPERS
+   ============================================================ */
+
+.section {
+  padding: var(--space-section) var(--space-gutter);
+  position: relative;
+}
+.section--mid  { background: var(--color-forest-mid); }
+.section--deep { background: var(--color-forest-deep); }
+
+.section__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section__header {
+  margin-bottom: 3.5rem;
+}
+.section__header--centered {
+  text-align: center;
+}
+
+.section__label {
+  display: block;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section__sub {
+  max-width: 520px;
+  margin-top: 1rem;
+}
+
+
+/* ============================================================
+   6. COMPONENTS
+   ============================================================ */
+
+/* -- Navigation ------------------------------------------- */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 1.5rem var(--space-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  transition:
+    background   var(--transition-slow),
+    border-color var(--transition-slow),
+    padding      0.4s var(--ease-out);
+}
+
+/* Frosted glass state after scrolling 60px */
+.nav--scrolled {
+  background: oklch(24% 0.078 148 / 0.95);
+  border-color: var(--color-border);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__logo img {
+  height: 82px;
+  width: auto;
+  display: block;
+}
+
+
+.nav__links {
+  display: flex;
+  gap: 2.5rem;
+}
+.nav__links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-cream-dim);
+  position: relative;
+  transition: color var(--transition-base);
+}
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-base);
+}
+.nav__links a:hover            { color: var(--color-cream); }
+.nav__links a:hover::after     { transform: scaleX(1); }
+
+.nav__cta {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-forest-deep);
+  background: var(--color-gold);
+  padding: 0.75rem 1.8rem;
+  transition: background var(--transition-base), transform 0.2s;
+}
+.nav__cta:hover {
+  background: var(--color-gold-dim);
+  transform: translateY(-1px);
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav__hamburger span {
+  width: 24px;
+  height: 1.5px;
+  background: var(--color-cream);
+  display: block;
+  transition: all 0.3s;
+}
+
+/* Mobile menu overlay */
+.nav__mobile {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 850;
+  background: oklch(24% 0.078 148 / 0.98);
+  backdrop-filter: blur(16px);
+  align-items: center;
+  justify-content: center;
+}
+.nav__mobile.is-open {
+  display: flex;
+}
+.nav__mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.nav__mobile-links a {
+  font-family: var(--ff-display);
+  font-size: 2.5rem;
+  color: var(--color-cream);
+  transition: color var(--transition-base);
+}
+.nav__mobile-links a:hover {
+  color: var(--color-gold);
+}
+
+
+/* -- Hero ------------------------------------------------- */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Parallax background layer — transform driven by script.js */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 60%, oklch(27% 0.083 148 / 0.6) 0%, transparent 70%),
+    linear-gradient(180deg, oklch(24% 0.078 148 / 0.2) 0%, oklch(24% 0.078 148 / 0.85) 100%);
+  pointer-events: none;
+}
+
+
+/* Botanical SVG decorations */
+.hero__deco {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero__deco--right {
+  top: 10%;
+  right: 5%;
+  width: clamp(100px, 18vw, 260px);
+  opacity: 0.12;
+}
+.hero__deco--left {
+  bottom: 15%;
+  left: 4%;
+  width: clamp(80px, 12vw, 170px);
+  opacity: 0.1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--space-gutter);
+  max-width: 900px;
+}
+
+.hero__tag {
+  display: inline-block;
+  margin-bottom: 1.8rem;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-dim);
+  padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: none;
+}
+
+.hero__title {
+  color: var(--color-cream);
+  margin-bottom: 1.5rem;
+}
+.hero__title em {
+  color: var(--color-gold);
+  font-style: normal;
+}
+
+.hero__sub {
+  max-width: 520px;
+  margin: 0 auto 3rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: oklch(80% 0.015 86);
+}
+
+.hero__ctas {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero__cta-secondary {
+  font-size: max(0.68rem, 11px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-cream-dim);
+  border-bottom: 1px solid oklch(80% 0.015 86 / 0.35);
+  padding-bottom: 2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.hero__cta-secondary:hover {
+  color: var(--color-cream);
+  border-color: oklch(80% 0.015 86 / 0.7);
+}
+
+/* Animated scroll arrow */
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero__scroll span {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--color-gold), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.2); }
+}
+
+
+/* -- Stats Bar -------------------------------------------- */
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--color-forest-mid);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stats-bar__item {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+}
+.stats-bar__item:last-child {
+  border-right: none;
+}
+
+.stats-bar__num {
+  font-family: var(--ff-display);
+  font-size: 2.8rem;
+  color: var(--color-cream);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stats-bar__num span {
+  color: var(--color-gold);
+}
+
+.stats-bar__desc {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+
+/* -- Marquee Ticker --------------------------------------- */
+
+.marquee {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 1.4rem 0;
+  background: var(--color-forest-deep);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee__track:hover {
+  animation-play-state: paused;
+}
+
+.marquee__item {
+  padding: 0 3rem;
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.marquee__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+/* -- Products Grid ---------------------------------------- */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5px;
+}
+
+/* Individual plant card */
+.product-card {
+  background: var(--color-forest-card);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-base);
+}
+.product-card:hover {
+  background: var(--color-forest-hover);
+}
+
+/* Image wrapper — fixed aspect ratio */
+.product-card__img-wrap {
+  aspect-ratio: 3 / 4;
+  background: var(--color-forest-mid);
+  overflow: hidden;
+  position: relative;
+}
+.product-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) saturate(0.85);
+  transition: transform 0.8s var(--ease-out), filter 0.8s;
+}
+.product-card:hover .product-card__img-wrap img {
+  transform: scale(1.06);
+  filter: brightness(1) saturate(1.05);
+}
+
+/* Care tip — slides up on hover (desktop) or tap toggle (mobile) */
+.product-card__care-tip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: oklch(from var(--color-forest-deep) l c h / 0.94);
+  padding: 1rem 1.2rem;
+  transform: translateY(100%);
+  transition: transform 0.45s var(--ease-out);
+  border-top: 1px solid var(--color-sage);
+}
+.product-card:hover .product-card__care-tip,
+.product-card__care-tip.is-open {
+  transform: translateY(0);
+}
+
+/* Tap-to-reveal button — hidden on desktop (hover handles it), visible on touch */
+.product-card__care-btn {
+  display: none;
+  margin-top: 0.9rem;
+  font-size: max(0.68rem, 11px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-sage-light);
+  border-bottom: 1px solid var(--color-border-bright);
+  padding-bottom: 2px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+.product-card__care-btn:hover {
+  color: var(--color-gold);
+}
+@media (hover: none) {
+  .product-card__care-btn { display: inline-block; }
+}
+
+.product-card__care-label {
+  display: block;
+  color: var(--color-gold);
+  font-size: max(0.6rem, 10px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.product-card__care-tip p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-cream-dim);
+}
+
+/* Text info below image */
+.product-card__info {
+  padding: 1.4rem 1.5rem 1.8rem;
+}
+
+.product-card__tag {
+  display: block;
+  font-size: max(0.58rem, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-sage-light);
+  margin-bottom: 0.5rem;
+}
+
+.product-card__name {
+  font-family: var(--ff-display);
+  font-size: 1.35rem;
+  color: var(--color-cream);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.product-card__desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-card__price {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  color: var(--color-gold);
+}
+
+.product-card__enquire {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: max(0.62rem, 12px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-sage-light);
+  border-bottom: 1px solid var(--color-border-bright);
+  padding-bottom: 2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.product-card__enquire:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+
+/* -- Pots Showcase ---------------------------------------- */
+
+.pots-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
+
+.pot-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pot-card__img {
+  aspect-ratio: 1;
+  width: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) brightness(0.85);
+  transition: filter 0.6s, transform 0.7s var(--ease-out);
+}
+.pot-card:hover .pot-card__img {
+  filter: saturate(1.05) brightness(0.95);
+  transform: scale(1.05);
+}
+
+.pot-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, oklch(from var(--color-forest-deep) l c h / 0.85) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.pot-card__name {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  color: var(--color-cream);
+  margin-bottom: 0.2rem;
+}
+
+.pot-card__price {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+}
+
+
+/* -- Services Accordion ----------------------------------- */
+
+.services__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Portrait image panel */
+.services__visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.services__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8) saturate(0.9);
+  transition: transform 1.2s var(--ease-out);
+}
+.services__visual:hover img {
+  transform: scale(1.04);
+}
+
+/* Gold badge overlay on image */
+.services__badge {
+  position: absolute;
+  bottom: 2rem;
+  left: -1.5rem;
+  background: var(--color-gold);
+  color: var(--color-forest-deep);
+  padding: 1.2rem 2rem;
+  z-index: 2;
+}
+.services__badge-num {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.services__badge-label {
+  font-size: max(0.62rem, 10px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Text content column */
+.services__content {
+  padding-top: 2rem;
+}
+.services__heading {
+  margin-top: 1rem;
+}
+.services__intro {
+  margin-top: 1.2rem;
+  max-width: 460px;
+}
+
+/* Accordion list */
+.services__list {
+  margin-top: 2.5rem;
+}
+
+/* Single accordion item */
+.service-item {
+  border-top: 1px solid var(--color-border);
+  padding: 1.8rem 0;
+  transition: border-color var(--transition-base);
+}
+.service-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+.service-item:hover {
+  border-color: var(--color-sage);
+}
+.service-item.is-open {
+  border-color: var(--color-sage);
+}
+
+.service-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.service-item__num {
+  font-family: var(--ff-display);
+  font-size: 0.85rem;
+  color: var(--color-gold-dim);
+  flex-shrink: 0;
+}
+
+.service-item__name {
+  font-family: var(--ff-display);
+  font-size: 1.4rem;
+  color: var(--color-cream);
+  flex: 1;
+}
+
+.service-item__toggle {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-sage-light);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+.service-item.is-open .service-item__toggle {
+  background: var(--color-sage);
+  color: var(--color-forest-deep);
+  border-color: var(--color-sage);
+}
+
+/* Collapsible body — grid-template-rows avoids max-height layout thrash */
+.service-item__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-out);
+}
+.service-item.is-open .service-item__body {
+  grid-template-rows: 1fr;
+}
+.service-item__body-inner {
+  overflow: hidden;
+  padding-top: 0;
+  transition: padding-top 0.45s var(--ease-out);
+}
+.service-item.is-open .service-item__body-inner {
+  padding-top: 1rem;
+}
+.service-item__body p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  max-width: 480px;
+}
+.service-item__price {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 0.75rem;
+}
+
+.services__cta {
+  display: inline-block;
+  margin-top: 2.5rem;
+}
+
+
+/* -- Quote / Contact Form --------------------------------- */
+
+.quote {
+  background: var(--color-forest-mid);
+  padding: clamp(4rem, 8vh, 7rem) var(--space-gutter);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Radial glow behind form */
+.quote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(55% 0.095 148 / 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.quote__inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+.quote__heading {
+  margin-top: 1rem;
+  color: var(--color-cream);
+}
+.quote__sub {
+  margin-top: 1rem;
+}
+
+/* Two-column grid form */
+.quote__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+/* Each input wrapper with animated underline on focus */
+.form__field {
+  background: var(--color-forest-deep);
+  position: relative;
+}
+.form__field--full {
+  grid-column: 1 / -1;
+}
+
+.form__field input,
+.form__field textarea,
+.form__field select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-cream);
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  padding: 1.2rem 1.4rem;
+}
+
+.form__field select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A96E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.4rem center;
+  background-size: 10px 7px;
+  padding-right: 3rem;
+}
+.form__field select option {
+  background: var(--color-forest-deep);
+}
+
+.form__field input::placeholder,
+.form__field textarea::placeholder {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.form__field textarea {
+  min-height: 110px;
+}
+
+/* Gold underline animation on focus */
+.form__field::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s var(--ease-out);
+}
+.form__field:focus-within::after {
+  transform: scaleX(1);
+}
+
+.form__submit {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-gold);
+  padding: 1.2rem 2rem;
+  width: 100%;
+  font-family: var(--ff-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-forest-deep);
+  transition: background var(--transition-base), transform 0.2s;
+}
+.form__submit:hover {
+  background: var(--color-gold-dim);
+  transform: translateY(-1px);
+}
+.form__submit span:last-child {
+  font-size: 1.2rem;
+}
+
+
+/* -- Process Steps ---------------------------------------- */
+
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.process__step {
+  position: relative;
+}
+
+.process__step-num {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 4.5rem;
+  color: var(--color-border);
+  line-height: 1;
+  margin-bottom: 1.2rem;
+  transition: color var(--transition-base);
+}
+.process__step:hover .process__step-num {
+  color: var(--color-gold-dim);
+}
+
+.process__step-name {
+  font-family: var(--ff-display);
+  font-size: 1.25rem;
+  color: var(--color-cream);
+  margin-bottom: 0.6rem;
+}
+
+.process__step-desc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+/* Horizontal connector line between steps */
+.process__step-line {
+  position: absolute;
+  top: 2.5rem;
+  left: calc(100% + 1rem);
+  width: calc(100% - 2rem);
+  height: 1px;
+  background: var(--color-border);
+}
+
+
+/* -- Footer ---------------------------------------------- */
+
+footer.footer {
+  background: var(--color-forest-footer);
+  border-top: 1px solid var(--color-border);
+  padding: clamp(3.5rem, 7vh, 6rem) var(--space-gutter) 2.5rem;
+}
+
+.footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem 2rem;
+}
+
+.footer__brand-name {
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  color: var(--color-cream);
+  margin-bottom: 0.8rem;
+}
+.footer__brand-name span {
+  color: var(--color-gold);
+}
+
+.footer__brand p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 280px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+.footer__social-link {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.45rem 0.85rem;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.footer__social-link:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.footer__col-title {
+  display: block;
+  font-size: max(0.65rem, 11px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.3rem;
+}
+
+.footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.footer__col ul a {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+.footer__col ul a:hover {
+  color: var(--color-cream);
+}
+
+.footer__bottom {
+  max-width: var(--max-width);
+  margin: 3rem auto 0;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer__bottom p {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+.footer__bottom a {
+  color: var(--color-sage-light);
+}
+
+
+/* -- WhatsApp FAB ----------------------------------------- */
+
+.whatsapp-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--color-whatsapp);
+  border-radius: 100px;
+  padding: 0.85rem 1.5rem 0.85rem 1rem;
+  box-shadow: 0 8px 32px oklch(50% 0.18 148 / 0.3);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.whatsapp-fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px oklch(50% 0.18 148 / 0.4);
+}
+
+.whatsapp-fab svg {
+  width: 22px;
+  height: 22px;
+  fill: white;
+  flex-shrink: 0;
+}
+
+.whatsapp-fab__text {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: white;
+}
+
+
+/* -- Toast Notification ----------------------------------- */
+
+.toast {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  z-index: 1200;
+  background: var(--color-sage);
+  color: var(--color-forest-deep);
+  padding: 1rem 1.5rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  max-width: 280px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   7. SCROLL REVEAL ANIMATIONS
+   Initial hidden state; JS adds .is-revealed to trigger them
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+/* .is-revealed replaces the old .revealed class for clarity */
+.reveal.is-revealed,
+.reveal-left.is-revealed,
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Staggered entrance delays via data-delay attribute */
+[data-delay="1"] { transition-delay: 0.1s; }
+[data-delay="2"] { transition-delay: 0.2s; }
+[data-delay="3"] { transition-delay: 0.3s; }
+[data-delay="4"] { transition-delay: 0.4s; }
+[data-delay="5"] { transition-delay: 0.5s; }
+[data-delay="6"] { transition-delay: 0.6s; }
+
+
+/* ============================================================
+   8. MEDIA QUERIES
+   Mobile-first breakpoints
+   ============================================================ */
+
+/* Tablet — 900px and below */
+@media (max-width: 900px) {
+  .services__layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .services__visual {
+    aspect-ratio: 16 / 9;
+  }
+  .services__badge {
+    bottom: 1.5rem;
+    left: 1rem;
+  }
+
+  .process__steps {
+    grid-template-columns: 1fr 1fr;
+  }
+  .process__step-line {
+    display: none;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Large mobile — 768px and below */
+@media (max-width: 768px) {
+  .nav__links  { display: none; }
+  .nav__hamburger { display: flex; }
+
+  .nav__cta {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.65rem;
+  }
+  .nav {
+    padding: 1.2rem var(--space-gutter);
+  }
+}
+
+/* Small mobile — 600px and below */
+@media (max-width: 600px) {
+  .pots-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+  .quote__form {
+    grid-template-columns: 1fr;
+  }
+  .form__field--full {
+    grid-column: 1;
+  }
+  .form__submit {
+    grid-column: 1;
+  }
+}
+
+/* Stats bar — 700px and below */
+@media (max-width: 700px) {
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stats-bar__item:nth-child(2) { border-right: none; }
+  .stats-bar__item:nth-child(3) { border-right: 1px solid var(--color-border); }
+}
+
+/* Extra small — 500px and below */
+@media (max-width: 500px) {
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+  .stats-bar__item {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .whatsapp-fab__text {
+    display: none;
+  }
+  .whatsapp-fab {
+    padding: 1rem;
+  }
+}
+
+
+/* ============================================================
+   9. FOCUS STATES
+   Visible focus rings for keyboard navigation.
+   Uses :focus-visible so mouse clicks don't trigger the ring.
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Form fields — focus is handled by the animated underline */
+.form__field input:focus-visible,
+.form__field textarea:focus-visible,
+.form__field select:focus-visible {
+  outline: none;
+}
+
+/* Nav links — don't show double indicator with the underline */
+.nav__links a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+
+/* ============================================================
+   10. REDUCED MOTION
+   Respects prefers-reduced-motion for users who are sensitive
+   to animation. Disables marquee, parallax, reveals, and
+   the scroll pulse without breaking layout.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* Stop all CSS animations */
+  .marquee__track       { animation: none; }
+  .hero__scroll-line    { animation: none; }
+
+  /* Collapse all transition durations to near-instant */
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+
+  /* Show reveal elements immediately — no fade/slide */
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

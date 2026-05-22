@@ -74,7 +74,7 @@ const plants = [
     tag:  'Easy Trailing',
     desc: 'Cascading heart-shaped leaves with golden variegation. A starter favourite that grows with intention.',
     price: 45000,
-    img:  'https://images.unsplash.com/photo-1591871937573-74dbba515c4c?w=600&q=80',
+    img:  'assets/Pothos Golden.png',
     care: 'Tolerates low to bright indirect light. Water when soil is 50% dry. Let trail or climb with a moss pole.',
   },
   {
@@ -82,7 +82,7 @@ const plants = [
     tag:  'Outdoor / Patio',
     desc: 'Mediterranean elegance for your terrace. Silvery-green foliage. Extremely drought-hardy once established.',
     price: 240000,
-    img:  'https://images.unsplash.com/photo-1598128558393-70ff21433be0?w=600&q=80',
+    img:  'assets/Dwarf Olive Tree.png',
     care: 'Full sun essential. Water deeply but infrequently. Prune lightly in dry season. Thrives in tropical highlands.',
   },
   {
